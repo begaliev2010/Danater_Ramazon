@@ -1,8 +1,9 @@
-<!DOCTYPE html><html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Donat Free Fire</title>
+  <title>Free Fire Donat</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,8 +15,8 @@
       margin-bottom: 10px;
     }
     label {
-      margin-top: 15px;
       font-weight: bold;
+      margin-top: 15px;
       display: block;
     }
     select, input[type=text], input[type=tel], button {
@@ -48,41 +49,19 @@
       padding: 12px;
       text-align: center;
     }
-    .currency-selector {
+    .language-currency {
       display: flex;
-      gap: 10px;
-      margin-top: 10px;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
     }
-    .currency-selector label {
+    .language-currency label {
       margin-top: 0;
-    }
-    .social {
-      margin-top: 25px;
-      display: flex;
-      gap: 10px;
-    }
-    .social a {
-      flex: 1;
-      text-decoration: none;
-      color: white;
-      padding: 12px 0;
-      font-weight: bold;
-      border-radius: 5px;
-      text-align: center;
-    }
-    .tiktok {
-      background: #000;
-    }
-    .instagram {
-      background: #E1306C;
-    }
-    .telegram {
-      background: #0088cc;
     }
     #orderModal {
       display: none;
       position: fixed;
-      z-index: 9999;
+      z-index: 1000;
       top: 0;
       left: 0;
       right: 0;
@@ -108,212 +87,373 @@
   </style>
 </head>
 <body>
-  <h1>Бегалиев Рамазон ✅</h1>
-  <label id="labelLang">Выберите язык:</label>
-  <select id="language" onchange="updateLanguage()">
-    <option value="RU">Русский</option>
-    <option value="EN">English</option>
-    <option value="TJ">Тоҷикӣ</option>
-  </select><label id="labelCurrency" style="margin-top:20px">Выберите валюту:</label>
+  <h1 id="mainTitle">FREE FIRE DONAT</h1>
 
-  <div class="currency-selector">
-    <label><input type="radio" name="currency" value="TJS" checked onchange="updatePrices()"> TJS</label>
-    <label><input type="radio" name="currency" value="USD" onchange="updatePrices()"> USD</label>
-    <label><input type="radio" name="currency" value="RUB" onchange="updatePrices()"> RUB</label>
-  </div>  <p id="topPromo"></p>
-  <h2 id="titleCheap"></h2>
-  <table id="diamondTable">
-    <thead>
-      <tr><th id="thDiamonds"></th><th id="thPrice"></th><th id="thBuy"></th></tr>
-    </thead>
-    <tbody>
-      <tr data-price="10"><td>100 + 5 🎁</td><td class="price"></td><td><button></button></td></tr>
-      <tr data-price="30"><td>310 + 16 🎁</td><td class="price"></td><td><button></button></td></tr>
-      <tr data-price="50"><td>520 + 26 🎁</td><td class="price"></td><td><button></button></td></tr>
-      <tr data-price="95"><td>1060 + 52 🎁</td><td class="price"></td><td><button></button></td></tr>
-      <tr data-price="200"><td>2180 + 218 🎁</td><td class="price"></td><td><button></button></td></tr>
-      <tr data-price="500"><td>5600 + 560 🎁</td><td class="price"></td><td><button></button></td></tr>
-    </tbody>
-  </table>
-  <!-- Vaucherlar bo‘limi --><h2 id="titleVoucher"></h2>
-<table id="voucherTable">
-  <thead>
-    <tr><th id="thVoucherType"></th><th id="thPriceVoucher"></th><th id="thVoucherBuy"></th></tr>
-  </thead>
-  <tbody>
-    <tr data-price="9"><td>Lite (90 алмаз)</td><td class="price"></td><td><button></button></td></tr>
-    <tr data-price="18"><td>Ҳафтаина (450 алмаз)</td><td class="price"></td><td><button></button></td></tr>
-    <tr data-price="100"><td>Моҳона (2600 алмаз)</td><td class="price"></td><td><button></button></td></tr>
-  </tbody>
-</table><!-- EVO Access bo‘limi --><h2 id="titleEvo"></h2>
-<table id="evoTable">
-  <thead>
-    <tr><th id="thEvoService"></th><th id="thEvoPrice"></th><th id="thEvoBuy"></th></tr>
-  </thead>
-  <tbody>
-    <tr data-price="9"><td id="evo3d">EVO ACCESS – 3 рӯз (MP40-G18)</td><td class="price"></td><td><button></button></td></tr>
-    <tr data-price="13"><td id="evo7d">EVO ACCESS – 7 рӯз (MP40-G18)</td><td class="price"></td><td><button></button></td></tr>
-    <tr data-price="34"><td id="evo30d">EVO ACCESS – 30 рӯз (MP40-G18)</td><td class="price"></td><td><button></button></td></tr>
-  </tbody>
-</table><!-- Tarmoqlar --><p id="subscribeText"></p>
-<div class="social">
-  <a href="https://tiktok.com/@begaliev_ramazon" target="_blank" class="tiktok">TikTok</a>
-  <a href="https://instagram.com/begaliev_ramazon" target="_blank" class="instagram">Instagram</a>
-  <a href="https://t.me/begaliev_ramazon" target="_blank" class="telegram">Telegram</a>
-</div><!-- Buyurtma Modal oynasi --><div id="orderModal">
-  <div id="orderModalContent">
-    <span class="closeBtn" onclick="closeOrderModal()">×</span>
-    <h2 id="orderTitle"></h2>
-    <label id="labelPlayerId" for="playerId"></label>
-    <input type="text" id="playerId" placeholder="ID" />
-    <label id="labelPlayerPhone" for="playerPhone"></label>
-    <input type="tel" id="playerPhone" placeholder="+992 123 456 789" />
-    <label for="contactMethod" id="labelContact"></label>
-    <select id="contactMethod">
-      <option value="telegram">Telegram</option>
-      <option value="whatsapp">WhatsApp</option>
-    </select>
-    <button onclick="sendOrder()">📨 <span id="btnSend"></span></button>
+  <div class="language-currency">
+    <div>
+      <label for="language">🌐 Выберите язык:</label>
+      <select id="language" onchange="updateLanguage()">
+        <option value="RU">Русский</option>
+        <option value="TJ">Тоҷикӣ</option>
+        <option value="UZ">O‘zbekcha</option>
+      </select>
+    </div>
+    <div>
+      <label>💱 Выберите валюта:</label><br />
+      <label><input type="radio" name="currency" value="TJS" checked onchange="updatePrices()" /> TJS</label>
+      <label><input type="radio" name="currency" value="RUB" onchange="updatePrices()" /> RUB</label>
+      <label><input type="radio" name="currency" value="USD" onchange="updatePrices()" /> USD</label>
+    </div>
   </div>
-</div>
-  <!-- Davomi: JavaScript funksiyalari, tarjimalar, to'liq matnli ishlov --><script>
-  const rates = {
-    TJS: 1,
-    USD: 10 / 1.10,
-    RUB: 0.10
-  };
 
-  let currentLang = "RU";
-  let currentOrderText = "";
-  let currentOrderPrice = 0;
+  <h2 id="titleDiamonds">💎 Almaz to‘plamlari</h2>
+  <table>
+    <thead>
+      <tr>
+        <th id="thDiamondName">To‘plam</th>
+        <th id="thDiamondPrice">Narx</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="diamondList"></tbody>
+  </table>
 
-  const translations = {
-    RU: {
-      topPromo: "🎉 Закажи <strong>1000+ алмазов</strong> и получи <strong>50 в подарок!</strong>",
-      labelLang: "Выберите язык:",
-      labelCurrency: "Выберите валюту:",
-      titleCheap: "🎮 GARENA FREE FIRE – Дешёвый донат 🔥",
-      titleVoucher: "💳 Донат через ваучеры",
-      titleEvo: "🔥 EVO ACCESS",
-      subscribeText: "Подпишись на соцсети и получи <strong>5 алмазов</strong>!",
-      thDiamonds: "Алмазы", thPrice: "Цена", thBuy: "Купить",
-      thVoucherType: "Ваучер", thPriceVoucher: "Цена", thVoucherBuy: "Купить",
-      thEvoService: "Услуга", thEvoPrice: "Цена", thEvoBuy: "Купить",
-      labelPlayerId: "ID игрока:", labelPlayerPhone: "Номер телефона:",
-      labelContact: "Куда отправить:", btnSend: "Отправить",
-      orderTitle: "Заказ алмазов", alertFill: "Пожалуйста, заполните все поля!"
-    },
-    EN: {
-      topPromo: "🎉 Order <strong>1000+ diamonds</strong> and get <strong>50 free!</strong>",
-      labelLang: "Select Language:", labelCurrency: "Select Currency:",
-      titleCheap: "🎮 GARENA FREE FIRE – Cheap Donat 🔥",
-      titleVoucher: "💳 Donat by vouchers", titleEvo: "🔥 EVO ACCESS",
-      subscribeText: "Subscribe and get <strong>5 diamonds</strong>!",
-      thDiamonds: "Diamonds", thPrice: "Price", thBuy: "Buy",
-      thVoucherType: "Voucher", thPriceVoucher: "Price", thVoucherBuy: "Buy",
-      thEvoService: "Service", thEvoPrice: "Price", thEvoBuy: "Buy",
-      labelPlayerId: "Player ID:", labelPlayerPhone: "Phone Number:",
-      labelContact: "Send to:", btnSend: "Send",
-      orderTitle: "Diamond Order", alertFill: "Please fill all fields!"
-    },
-    TJ: {
-      topPromo: "🎉 1000+ алмос фармоиш диҳед ва <strong>50</strong> тӯҳфа гиред!",
-      labelLang: "Забонро интихоб кунед:", labelCurrency: "Асъорро интихоб кунед:",
-      titleCheap: "🎮 GARENA FREE FIRE – Донати арзон 🔥",
-      titleVoucher: "💳 Донат тавассути ваучерҳо", titleEvo: "🔥 EVO ACCESS",
-      subscribeText: "Ба саҳифаҳои мо обуна шавед ва <strong>5 алмос</strong> гиред!",
-      thDiamonds: "Алмосҳо", thPrice: "Нарх", thBuy: "Харидан",
-      thVoucherType: "Ваучер", thPriceVoucher: "Нарх", thVoucherBuy: "Харидан",
-      thEvoService: "Хизмат", thEvoPrice: "Нарх", thEvoBuy: "Харидан",
-      labelPlayerId: "ID бозингар:", labelPlayerPhone: "Рақами телефон:",
-      labelContact: "Ба куҷо фиристода шавад:", btnSend: "Фиристодан",
-      orderTitle: "Фармоиши алмос", alertFill: "Лутфан ҳамаи майдонҳоро пур кунед!"
+  <h2 id="titleVoucher">💳 Vaucherlar</h2>
+  <table>
+    <thead>
+      <tr>
+        <th id="thVoucherName">Nomi</th>
+        <th id="thVoucherPrice">Narx</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="voucherList"></tbody>
+  </table>
+
+  <h2 id="titleBoyyah">🔰 Prokachka Boyyah</h2>
+  <table>
+    <thead>
+      <tr>
+        <th id="thBoyyahName">To‘plam</th>
+        <th id="thBoyyahPrice">Narx</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="boyyahList"></tbody>
+  </table>
+
+  <h2 id="titleSoft">⚙️ Soft / Sertifikat / Nastroyka</h2>
+  <table>
+    <thead>
+      <tr>
+        <th id="thSoftName">Xizmat turi</th>
+        <th id="thSoftPrice">Narx</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="softList"></tbody>
+  </table>
+
+   <h2 id="titleSoft">⚙ Создать сайт</h2>
+  <table>
+    <thead>
+      <tr>
+        <th id="thSoftName">WhatsApp</th>
+        <th id="thSoftPrice">+992 03 183 1212</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="saytList"></tbody>
+  </table>
+
+  <!-- Buyurtma Modal oynasi -->
+  <div id="orderModal">
+    <div id="orderModalContent">
+      <span class="closeBtn" onclick="closeOrderModal()">×</span>
+      <h2 id="orderTitle"></h2>
+      <div id="idGroup">
+        <label for="playerId" id="labelPlayerId">ID:</label>
+        <input type="text" id="playerId" placeholder="123456789" />
+      </div>
+      <label for="playerPhone" id="labelPlayerPhone">📱 Telefon raqam:</label>
+      <input type="tel" id="playerPhone" placeholder="+992 123 456 789" />
+      <label for="contactMethod" id="labelContact">✉️ Qayerga yuboraylik?</label>
+      <select id="contactMethod">
+        <option value="telegram">Telegram</option>
+        <option value="whatsapp">WhatsApp</option>
+      </select>
+      <button onclick="sendOrder()" id="sendButton">📨 Otpravit</button>
+    </div>
+  </div>
+
+  <script>
+    const rates = { TJS: 1, RUB: 0.1, USD: 10 / 1.1 };
+
+    const items = {
+      diamonds: [
+        ['100 + 5 🎁', 10],
+        ['310 + 16 🎁', 30],
+        ['520 + 26 🎁', 50],
+        ['1060 + 52 🎁', 95],
+        ['2180 + 218 🎁', 200],
+        ['5600 + 560 🎁', 500]
+      ],
+      voucher: [
+        ['Lite (90 алмаз)', 9],
+        ['Haftalik (450 алмаз)', 18],
+        ['Mohona (2600 алмаз)', 105]
+      ],
+      boyyah: [
+        ['120 алмаз', 6],
+        ['200 алмаз (1)', 9],
+        ['200 алмаз (2)', 9],
+        ['200 алмаз (3)', 9],
+        ['200 алмаз (4)', 9],
+        ['350 алмаз', 13]
+      ],
+      soft: [
+        ['Sertifikat (Android)', 10, false],
+        ['Soft (90% Bez Ban)', 10, false],
+        ['Nastroyka VIP (5см)', 5, false]
+      ],
+      sayt: [
+        ['sayt yasash', 10, false],
+      
+      ]
+    };
+
+    let orderItem = '',
+      orderPrice = 0,
+      askId = true;
+
+    const translations = {
+      RU: {
+        mainTitle: 'Донат Free Fire',
+        titleDiamonds: '💎 Алмазы',
+        titleVoucher: '💳 Ваучеры',
+        titleBoyyah: '🔰 Прокачка Бойях',
+        titleSoft: '⚙️ Софт / Сертификат / Настройка',
+        titlesayt: '⚙️ Создать сайт',
+        thDiamondName: 'Пакет',
+        thDiamondPrice: 'Цена',
+        thVoucherName: 'Название',
+        thVoucherPrice: 'Цена',
+        thBoyyahName: 'Пакет',
+        thBoyyahPrice: 'Цена',
+        thSoftName: 'Услуга',
+        thSoftPrice: 'Цена',
+        labelPlayerId: 'ID игрока:',
+        labelPlayerPhone: 'Номер телефона:',
+        labelContact: 'Куда отправить:',
+        sendButton: 'Купить',
+        alertFill: 'Пожалуйста, заполните все поля!'
+      },
+      TJ: {
+        mainTitle: 'Донати арзон Free Fire',
+        titleDiamonds: '💎 Алмосҳо',
+        titleVoucher: '💳 Ваучерҳо',
+        titleBoyyah: '🔰 Прокачка Бойях',
+        titleSoft: '⚙️ Софт / Сертификат / Настройка',
+        titlesayt: '⚙️ Сайт сохтан',
+        thDiamondName: 'Пакет',
+        thDiamondPrice: 'Нархи',
+        thVoucherName: 'Ном',
+        thVoucherPrice: 'Нархи',
+        thBoyyahName: 'Пакет',
+        thBoyyahPrice: 'Нархи',
+        thSoftName: 'Хизмат',
+        thSoftPrice: 'Нархи',
+        labelPlayerId: 'ID бозингар:',
+        labelPlayerPhone: 'Рақами телефон:',
+        labelContact: 'Ба куҷо фиристода шавад:',
+        sendButton: 'Харидан',
+        alertFill: 'Лутфан ҳамаи майдонҳоро пур кунед!'
+      },
+      UZ: {
+        mainTitle: 'Free Fire Donat',
+        titleDiamonds: '💎 Almazlar',
+        titleVoucher: '💳 Vaucherlar',
+        titleBoyyah: '🔰 Boyyah Prokachka',
+        titleSoft: '⚙️ Soft / Sertifikat / Nastroyka',
+        titlesayt: '⚙️ Sayt yasash',
+        thDiamondName: 'To‘plam',
+        thDiamondPrice: 'Narx',
+        thVoucherName: 'Nomi',
+        thVoucherPrice: 'Narx',
+        thBoyyahName: 'To‘plam',
+        thBoyyahPrice: 'Narx',
+        thSoftName: 'Xizmat',
+        thSoftPrice: 'Narx',
+        labelPlayerId: 'ID:',
+        labelPlayerPhone: 'Telefon raqam:',
+        labelContact: 'Qayerga yuborilsin:',
+        sendButton: 'Sotib olish',
+        alertFill: 'Iltimos, barcha maydonlarni to‘ldiring!'
+      }
+    };
+
+    function updateLanguage() {
+      const lang = document.getElementById('language').value;
+      document.documentElement.lang = lang.toLowerCase();
+      const t = translations[lang];
+
+      document.getElementById('mainTitle').textContent = t.mainTitle;
+      document.getElementById('titleDiamonds').textContent = t.titleDiamonds;
+      document.getElementById('titleVoucher').textContent = t.titleVoucher;
+      document.getElementById('titleBoyyah').textContent = t.titleBoyyah;
+      document.getElementById('titleSoft').textContent = t.titleSoft;
+      document.getElementById('thDiamondName').textContent = t.thDiamondName;
+      document.getElementById('thDiamondPrice').textContent = t.thDiamondPrice;
+      document.getElementById('thVoucherName').textContent = t.thVoucherName;
+      document.getElementById('thVoucherPrice').textContent = t.thVoucherPrice;
+      document.getElementById('thBoyyahName').textContent = t.thBoyyahName;
+      document.getElementById('thBoyyahPrice').textContent = t.thBoyyahPrice;
+      document.getElementById('thSoftName').textContent = t.thSoftName;
+      document.getElementById('thSoftPrice').textContent = t.thSoftPrice;
+      document.getElementById('labelPlayerId').textContent = t.labelPlayerId;
+      document.getElementById('labelPlayerPhone').textContent = t.labelPlayerPhone;
+      document.getElementById('labelContact').textContent = t.labelContact;
+      document.getElementById('sendButton').textContent = t.sendButton;
+
+      updatePrices();
     }
-  };
 
-  function updateLanguage() {
-    const t = translations[currentLang = document.getElementById("language").value];
-    document.getElementById("topPromo").innerHTML = t.topPromo;
-    document.getElementById("labelLang").textContent = t.labelLang;
-    document.getElementById("labelCurrency").textContent = t.labelCurrency;
-    document.getElementById("titleCheap").textContent = t.titleCheap;
-    document.getElementById("titleVoucher").textContent = t.titleVoucher;
-    document.getElementById("titleEvo").textContent = t.titleEvo;
-    document.getElementById("subscribeText").innerHTML = t.subscribeText;
-    document.getElementById("thDiamonds").textContent = t.thDiamonds;
-    document.getElementById("thPrice").textContent = t.thPrice;
-    document.getElementById("thBuy").textContent = t.thBuy;
-    document.getElementById("thVoucherType").textContent = t.thVoucherType;
-    document.getElementById("thPriceVoucher").textContent = t.thPriceVoucher;
-    document.getElementById("thVoucherBuy").textContent = t.thVoucherBuy;
-    document.getElementById("thEvoService").textContent = t.thEvoService;
-    document.getElementById("thEvoPrice").textContent = t.thEvoPrice;
-    document.getElementById("thEvoBuy").textContent = t.thEvoBuy;
-    document.getElementById("labelPlayerId").textContent = t.labelPlayerId;
-    document.getElementById("labelPlayerPhone").textContent = t.labelPlayerPhone;
-    document.getElementById("labelContact").textContent = t.labelContact;
-    document.getElementById("btnSend").textContent = t.btnSend;
-    updatePrices();
-  }
-
-  function getSelectedCurrency() {
-    return document.querySelector("input[name='currency']:checked").value;
-  }
-
-  function getConvertedPrice(tjsPrice) {
-    const currency = getSelectedCurrency();
-    const rate = rates[currency];
-    if (currency === "USD") return (tjsPrice / rate).toFixed(2) + " $";
-    if (currency === "RUB") return Math.round(tjsPrice / rate) + " ₽";
-    return tjsPrice.toFixed(2) + " TJS";
-  }
-
-  function updatePrices() {
-    document.querySelectorAll("table tbody tr").forEach(row => {
-      const tjsPrice = parseFloat(row.getAttribute("data-price"));
-      row.querySelector(".price").textContent = getConvertedPrice(tjsPrice);
-      const btn = row.querySelector("button");
-      btn.textContent = translations[currentLang].thBuy;
-      btn.onclick = () => openOrderModal(row.cells[0].textContent, getConvertedPrice(tjsPrice));
-    });
-  }
-
-  function openOrderModal(itemName, itemPrice) {
-    currentOrderText = itemName;
-    currentOrderPrice = itemPrice;
-    document.getElementById("orderTitle").textContent =
-      translations[currentLang].orderTitle + ": " + itemName + " — " + itemPrice;
-    document.getElementById("playerId").value = "";
-    document.getElementById("playerPhone").value = "";
-    document.getElementById("contactMethod").value = "telegram";
-    document.getElementById("orderModal").style.display = "block";
-  }
-
-  function closeOrderModal() {
-    document.getElementById("orderModal").style.display = "none";
-  }
-
-  function sendOrder() {
-    const playerId = document.getElementById("playerId").value.trim();
-    const playerPhone = document.getElementById("playerPhone").value.trim();
-    const contactMethod = document.getElementById("contactMethod").value;
-    if (!playerId || !playerPhone) {
-      alert(translations[currentLang].alertFill);
-      return;
+    function getSelectedCurrency() {
+      return document.querySelector("input[name='currency']:checked").value;
     }
 
-    const message = encodeURIComponent(
-      `🧾 ЗАКАЗ:\n📦 ${currentOrderText} — ${currentOrderPrice}\n🎮 ID: ${playerId}\n📞 Телефон: ${playerPhone}`
-    );
+    function convertPrice(tjsPrice) {
+      const currency = getSelectedCurrency();
+      const rate = rates[currency];
+      if (currency === 'USD') return (tjsPrice / rate).toFixed(2) + ' $';
+      if (currency === 'RUB') return Math.round(tjsPrice / rate) + ' ₽';
+      return tjsPrice.toFixed(2) + ' TJS';
+    }
 
-    const contactUrl =
-      contactMethod === "whatsapp"
-        ? `https://wa.me/992031831212?text=${message}`
-        : `https://t.me/begaliev_ramazon?text=${message}`;
+    function createRow(item, index, category) {
+      const tr = document.createElement('tr');
+      tr.setAttribute('data-price', item[1]);
+      tr.setAttribute('data-category', category);
+      tr.setAttribute('data-index', index);
 
-    window.open(contactUrl, "_blank");
-    closeOrderModal();
-  }
+      const tdName = document.createElement('td');
+      tdName.textContent = item[0];
+      const tdPrice = document.createElement('td');
+      tdPrice.className = 'price';
+      const tdBuy = document.createElement('td');
+      const btnBuy = document.createElement('button');
 
-  updateLanguage();
-</script>
+      btnBuy.textContent = translations[document.getElementById('language').value].sendButton;
+      btnBuy.onclick = () => openOrderModal(category, index);
+
+      tdBuy.appendChild(btnBuy);
+      tr.appendChild(tdName);
+      tr.appendChild(tdPrice);
+      tr.appendChild(tdBuy);
+      return tr;
+    }
+
+    function fillTables() {
+      const diamondList = document.getElementById('diamondList');
+      const voucherList = document.getElementById('voucherList');
+      const boyyahList = document.getElementById('boyyahList');
+      const softList = document.getElementById('softList');
+
+      diamondList.innerHTML = '';
+      voucherList.innerHTML = '';
+      boyyahList.innerHTML = '';
+      softList.innerHTML = '';
+
+      items.diamonds.forEach((item, i) => {
+        diamondList.appendChild(createRow(item, i, 'diamonds'));
+      });
+      items.voucher.forEach((item, i) => {
+        voucherList.appendChild(createRow(item, i, 'voucher'));
+      });
+      items.boyyah.forEach((item, i) => {
+        boyyahList.appendChild(createRow(item, i, 'boyyah'));
+      });
+      items.soft.forEach((item, i) => {
+        softList.appendChild(createRow(item, i, 'soft'));
+      });
+    }
+
+    function updatePrices() {
+      document.querySelectorAll('tbody tr').forEach(tr => {
+        const price = parseFloat(tr.getAttribute('data-price'));
+        const tdPrice = tr.querySelector('.price');
+        tdPrice.textContent = convertPrice(price);
+        // Update button text for language change
+        const btn = tr.querySelector('button');
+        btn.textContent = translations[document.getElementById('language').value].sendButton;
+      });
+    }
+
+    function openOrderModal(category, index) {
+      orderItem = items[category][index];
+      orderPrice = orderItem[1];
+
+      const lang = document.getElementById('language').value;
+      const t = translations[lang];
+
+      const orderTitle = `${t.mainTitle}: ${orderItem[0]} — ${convertPrice(orderPrice)}`;
+      document.getElementById('orderTitle').textContent = orderTitle;
+
+      // Show or hide playerId input depending on category
+      if(category === 'soft') {
+        askId = false;
+        document.getElementById('idGroup').style.display = 'none';
+      } else {
+        askId = true;
+        document.getElementById('idGroup').style.display = 'block';
+      }
+
+      // Clear inputs
+      document.getElementById('playerId').value = '';
+      document.getElementById('playerPhone').value = '';
+      document.getElementById('contactMethod').value = 'telegram';
+
+      document.getElementById('orderModal').style.display = 'block';
+    }
+
+    function closeOrderModal() {
+      document.getElementById('orderModal').style.display = 'none';
+    }
+
+    function sendOrder() {
+      const phone = document.getElementById('playerPhone').value.trim();
+      const contact = document.getElementById('contactMethod').value;
+      const id = document.getElementById('playerId').value.trim();
+
+      const lang = document.getElementById('language').value;
+      const t = translations[lang];
+
+      if (!phone || (askId && !id)) {
+        alert(t.alertFill);
+        return;
+      }
+
+      let message = `🧾 Заказ:\n📦 ${orderItem[0]} — ${convertPrice(orderPrice)}\n`;
+
+      if(askId) message += `🎮 ID: ${id}\n`;
+      message += `📞 Телефон: ${phone}`;
+
+      // Telegram or WhatsApp link
+      let url = '';
+      if (contact === 'telegram') {
+        url = `https://t.me/begaliev_ramazon?text=${encodeURIComponent(message)}`;
+      } else {
+        url = `https://wa.me/992031831212?text=${encodeURIComponent(message)}`;
+      }
+
+      window.open(url, '_blank');
+      closeOrderModal();
+    }
+
+    // Initial setup
+    fillTables();
+    updateLanguage();
+
+  </script>
+</body>
+</html>
